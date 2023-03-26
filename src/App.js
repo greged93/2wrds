@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import StarknetAccount from './components/StarknetAccount';
+import { StarknetConfig, InjectedConnector } from '@starknet-react/core';
+import { SequencerProvider } from 'starknet';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    const connectors = [
+        new InjectedConnector({ options: { id: 'braavos' } }),
+        new InjectedConnector({ options: { id: 'argentX' } }),
+    ];
+    const testnet1 = 'https://alpha4.starknet.io/';
+
+    return (
+        <StarknetConfig
+            connectors={connectors}
+            defaultProvider={new SequencerProvider({ baseUrl: testnet1 })}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+            <div>
+                <StarknetAccount />
+                <h1>Hello world!</h1>
+            </div>
+        </StarknetConfig>
+    );
 }
 
 export default App;
