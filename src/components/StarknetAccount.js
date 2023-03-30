@@ -3,35 +3,20 @@ import { useAccount, useConnectors } from '@starknet-react/core';
 
 function StarknetAccount() {
     // React state
-    const [connectors, setConnectors] = useState([]);
+    const [_, setConnectors] = useState([]);
     // React hooks
-    const { account, address, status } = useAccount();
-    const { available, connect, disconnect } = useConnectors();
+    const { account, address } = useAccount();
+    const { available } = useConnectors();
 
     useEffect(() => {
         if (available) setConnectors(available);
     }, [available]);
 
-    let rendered_address = 'Not connected to StarkNet';
+    let text = 'Please connect your wallet';
     if (account) {
-        rendered_address = address.slice(0, 6) + '...' + address.slice(-4);
-    } else {
-        return connectors.map((connector, index) => {
-            return (
-                <div key={index}>
-                    <button onClick={() => connect(connector)}>
-                        Connect account
-                    </button>
-                </div>
-            );
-        });
+        text = address.slice(0, 6) + '...' + address.slice(-4);
     }
-
-    return (
-        <div>
-            <div>My address {rendered_address}</div>
-        </div>
-    );
+    return <div className="text-white font-mono">{text}</div>;
 }
 
 export default StarknetAccount;
