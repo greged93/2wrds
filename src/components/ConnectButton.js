@@ -23,7 +23,6 @@ function ConnectButton() {
             </button>
         );
     } else {
-        console.log('connectors[0]:', connectors[0]);
         return (
             <button
                 type="button"
