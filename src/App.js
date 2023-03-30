@@ -1,6 +1,8 @@
-import StarknetAccount from './components/StarknetAccount';
 import { StarknetConfig, InjectedConnector } from '@starknet-react/core';
 import { SequencerProvider } from 'starknet';
+import Body from './components/Body';
+import Header from './components/Header';
+import './App.css';
 
 function App() {
     const connectors = [
@@ -10,15 +12,15 @@ function App() {
     const testnet1 = 'https://alpha4.starknet.io/';
 
     return (
-        <StarknetConfig
-            connectors={connectors}
-            defaultProvider={new SequencerProvider({ baseUrl: testnet1 })}
-        >
-            <div>
-                <StarknetAccount />
-                <h1>Hello world!</h1>
-            </div>
-        </StarknetConfig>
+        <div>
+            <StarknetConfig
+                connectors={connectors}
+                defaultProvider={new SequencerProvider({ baseUrl: testnet1 })}
+            >
+                <Header />
+                <Body />
+            </StarknetConfig>
+        </div>
     );
 }
 
