@@ -1,11 +1,9 @@
 // StarsBackground.js
-import React, { useEffect, useState } from 'react';
-import ConnectButton from './ConnectButton';
+import React, { useMemo } from 'react';
+import CentralButton from './CentralButton';
 
 export default function StarsBackground({ numberOfStars = 100, secret = 42 }) {
-    const [stars, setStars] = useState([]);
-
-    useEffect(() => {
+    const stars = useMemo(() => {
         const generateStars = () => {
             const newStars = [];
 
@@ -13,7 +11,7 @@ export default function StarsBackground({ numberOfStars = 100, secret = 42 }) {
                 const x = Math.floor(Math.random() * 100);
                 const y = Math.floor(Math.random() * 100);
                 let f =
-                    i != secret
+                    i !== secret
                         ? () => {
                               console.log('Not the secret');
                           }
@@ -22,12 +20,10 @@ export default function StarsBackground({ numberOfStars = 100, secret = 42 }) {
                           };
                 newStars.push({ id: i, x, y, f });
             }
-
-            setStars(newStars);
+            return newStars;
         };
-
-        generateStars();
-    }, [numberOfStars]);
+        return generateStars();
+    }, [numberOfStars, secret]);
 
     return (
         <div className="relative w-screen h-screen bg-gray-900 flex">
@@ -53,7 +49,7 @@ export default function StarsBackground({ numberOfStars = 100, secret = 42 }) {
                 </div>
             ))}
             <div className="m-auto p-6 g:px-8">
-                <ConnectButton />
+                <CentralButton />
             </div>
         </div>
     );
