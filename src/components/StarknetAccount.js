@@ -14,6 +14,7 @@ function StarknetAccount() {
     const handleDisconnect = () => {
         if (account) {
             disconnect();
+            setAccountText('Please connect your wallet');
         }
     };
 
